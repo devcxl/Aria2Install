@@ -1,6 +1,7 @@
 #!/bin/bash
 install() {
   if [ -f /usr/bin/systemd/system/aria2c.service ];then systemctl disable --now aria2c.service;fi
+  [[ "$EPEL_FLAG" -eq '1' ]] && install_software 'epel-release'
   install_software 'aria2'
   install_aria2_service
   install_aria2_conf

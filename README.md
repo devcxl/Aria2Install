@@ -1,4 +1,14 @@
 # Aria2安装脚本
+
+系统要求
+* Centos7+: `curl` , `yum`/`dnf` , `systemd`
+* Centos8: `curl` , `yum`/`dnf` , `systemd`
+* ArchLinux: `curl` , `pacman` , `systemd`
+* Ubuntu18+: `curl` , `apt` , `systemd`
+* openSUSE: `curl` , `zypper` , `systemd`
+
+> Centos系统将会安装`epel-release`仓库
+
 使用方式:
 
 ```

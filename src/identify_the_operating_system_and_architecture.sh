@@ -68,9 +68,11 @@ identify_the_operating_system_and_architecture() {
     elif [[ "$(type -P dnf)" ]]; then
       PACKAGE_MANAGEMENT_INSTALL='dnf -y install'
       PACKAGE_MANAGEMENT_REMOVE='dnf remove'
+      EPEL_FLAG='1'
     elif [[ "$(type -P yum)" ]]; then
       PACKAGE_MANAGEMENT_INSTALL='yum -y install'
       PACKAGE_MANAGEMENT_REMOVE='yum remove'
+      EPEL_FLAG='1'
     elif [[ "$(type -P zypper)" ]]; then
       PACKAGE_MANAGEMENT_INSTALL='zypper install -y --no-recommends'
       PACKAGE_MANAGEMENT_REMOVE='zypper remove'
