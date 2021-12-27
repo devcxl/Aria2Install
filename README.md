@@ -17,6 +17,7 @@ help              使用帮助
 version           当前安装的Aria2版本信息
 remove            卸载Aria2
 install           安装Aria2
+reconfig          重新配置Aria2
 ```
 
 安装
