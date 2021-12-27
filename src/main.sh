@@ -14,8 +14,8 @@ main() {
 }
 
 version(){
-    if [[ "$(type -P aria2)" ]];then
-        aria2c --version | grep aria2\ version
+    if [ $(type -P aria2c) ];then
+        aria2c --version 
     else
         echo "aria2 not installed"
     fi

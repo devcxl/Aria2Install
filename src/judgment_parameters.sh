@@ -9,9 +9,11 @@ judgment_parameters() {
       ;;
     'remove')
       REMOVE='1'
+      break
       ;;
     'reconfig')
       RECONFIG='1'
+      break
       ;;
     'version')
       VERSION='1'
