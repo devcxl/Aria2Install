@@ -8,11 +8,10 @@ judgment_parameters() {
       break
       ;;
     'remove')
-      if [[ "$#" -gt '1' ]]; then
-        echo 'error: Please enter the correct parameters.'
-        exit 1
-      fi
       REMOVE='1'
+      ;;
+    'reconfig')
+      RECONFIG='1'
       ;;
     'version')
       VERSION='1'

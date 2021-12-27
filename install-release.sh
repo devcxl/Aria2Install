@@ -277,11 +277,10 @@ judgment_parameters() {
       break
       ;;
     'remove')
-      if [[ "$#" -gt '1' ]]; then
-        echo 'error: Please enter the correct parameters.'
-        exit 1
-      fi
       REMOVE='1'
+      ;;
+    'reconfig')
+      RECONFIG='1'
       ;;
     'version')
       VERSION='1'
@@ -321,6 +320,20 @@ read_install_param() {
         ;;
     esac
 }
+reconfig(){
+    if [ ! -f /etc/aria2/aria2.conf ];then echo "/etc/aria2/aria2.conf not found!";exit;fi 
+    read_install_param
+    config_conf
+    if [ $(type -P aria2) ];then
+        if [ -f /usr/bin/systemd/system/aria2c.service ];then
+            systemctl restart aria2c.service
+        else
+            echo "aria2c.service not found! Please reinstall Aria2."
+        fi
+    else
+        echo "Aria2 not installed! Please install Aria2."
+    fi
+}
 remove(){
   systemctl disable --now aria2c.service
   rm -rf /etc/aria2/
@@ -344,7 +357,7 @@ main() {
     [[ "$VERSION" -eq '1' ]] && version
     [[ "$REMOVE" -eq '1' ]] && remove
     [[ "$INSTALL" -eq '1' ]] && install
-    
+    [[ "$RECONFIG" -eq '1' ]] && reconfig
 }
 version(){
     if [[ "$(type -P aria2)" ]];then

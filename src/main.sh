@@ -10,7 +10,7 @@ main() {
     [[ "$VERSION" -eq '1' ]] && version
     [[ "$REMOVE" -eq '1' ]] && remove
     [[ "$INSTALL" -eq '1' ]] && install
-    
+    [[ "$RECONFIG" -eq '1' ]] && reconfig
 }
 
 version(){
