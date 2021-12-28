@@ -22,9 +22,9 @@ reconfig          重新配置Aria2
 
 安装
 
-`bash <(curl -L https://cdn.jsdelivr.net/gh/devcxl/aria2-install@master/install-release.sh) install`
+`bash <(curl -L https://cdn.jsdelivr.net/gh/devcxl/Aria2Install@master/install-release.sh) install`
 
 卸载
 
-`bash <(curl -L https://cdn.jsdelivr.net/gh/devcxl/aria2-install@master/install-release.sh) remove`
+`bash <(curl -L https://cdn.jsdelivr.net/gh/devcxl/Aria2Install@master/install-release.sh) remove`
 
