@@ -130,7 +130,7 @@ install_software() {
     fi
 }
 install() {
-  if [ -f /usr/bin/systemd/system/aria2c.service ];then systemctl disable --now aria2c.service;fi
+  if [ -f /usr/lib/systemd/system/aria2c.service ];then systemctl disable --now aria2c.service;fi
   [[ "$EPEL_FLAG" -eq '1' ]] && install_software 'epel-release'
   install_software 'aria2'
   install_aria2_service
@@ -327,7 +327,7 @@ reconfig(){
     read_install_param
     config_conf
     if [ $(type -P aria2) ];then
-        if [ -f /usr/bin/systemd/system/aria2c.service ];then
+        if [ -f /usr/lib/systemd/system/aria2c.service ];then
             systemctl restart aria2c.service
         else
             echo "aria2c.service not found! Please reinstall Aria2."
