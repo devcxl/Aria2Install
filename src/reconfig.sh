@@ -1,6 +1,6 @@
 #!/bin/bash
 reconfig(){
-    if [ ! -f /etc/aria2/aria2.conf ];then echo "/etc/aria2/aria2.conf not found!";exit;fi 
+    install_aria2_conf
     read_install_param
     config_conf
     if [ $(type -P aria2) ];then
