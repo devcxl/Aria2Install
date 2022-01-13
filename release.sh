@@ -14,6 +14,7 @@ check_if_running_as_root() {
 }
 config_conf(){
   sed -i "s/%PORT%/$RPC_PORT/g" /etc/aria2/aria2.conf
+  sed -i "s/%DOWNLOAD_PATH%/$DOWNLOAD_PATH/g" /etc/aria2/aria2.conf
   sed -i "s/%UUID%/$RPC_SEC/g" /etc/aria2/aria2.conf
   sed -i "s/%ENABLE_RPC%/$ENABLE_RPC/g" /etc/aria2/aria2.conf
   echo "=> Configuration succeeded! (/etc/aria2/aria2.conf)"
@@ -161,13 +162,11 @@ install_aria2_service() {
 Description=Aria2 Service
 Documentation=https://aria2.github.io/
 After=network-online.target
-Wants=network-online.target
 [Service]
-PIDFile=/tmp/aria2.pid
+Type=forking
 ExecStart=/usr/bin/aria2c --conf-path=/etc/aria2/aria2.conf
-Restart=always
 [Install]
-WantedBy=multi-user.target
+WantedBy=default.target
 EOF
   fi
 }
@@ -181,7 +180,7 @@ log-level=warn
 log=/var/log/aria2/aria2.log
 # 后台运行
 # daemon=true
-dir=/data/downloads/
+dir=%DOWNLOAD_PATH%
 input-file=/var/log/aria2/aria2.session
 save-session=/var/log/aria2/aria2.session
 save-session-interval=30
@@ -323,7 +322,7 @@ read_install_param() {
     esac
 }
 reconfig(){
-    if [ ! -f /etc/aria2/aria2.conf ];then echo "/etc/aria2/aria2.conf not found!";exit;fi 
+    install_aria2_conf
     read_install_param
     config_conf
     if [ $(type -P aria2) ];then
