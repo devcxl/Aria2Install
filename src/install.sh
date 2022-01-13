@@ -34,15 +34,13 @@ install_aria2_service() {
 Description=Aria2 Service
 Documentation=https://aria2.github.io/
 After=network-online.target
-Wants=network-online.target
 
 [Service]
-PIDFile=/tmp/aria2.pid
+Type=forking
 ExecStart=/usr/bin/aria2c --conf-path=/etc/aria2/aria2.conf
-Restart=always
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=default.target
 EOF
   fi
 }
