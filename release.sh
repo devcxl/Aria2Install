@@ -14,7 +14,7 @@ check_if_running_as_root() {
 }
 config_conf(){
   sed -i "s/%PORT%/$RPC_PORT/g" /etc/aria2/aria2.conf
-  sed -i "s/%DOWNLOAD_PATH%/$DOWNLOAD_PATH/g" /etc/aria2/aria2.conf
+  sed -i "s/%DOWNLOADPATH%/$DOWNLOAD_PATH/g" /etc/aria2/aria2.conf
   sed -i "s/%UUID%/$RPC_SEC/g" /etc/aria2/aria2.conf
   sed -i "s/%ENABLE_RPC%/$ENABLE_RPC/g" /etc/aria2/aria2.conf
   echo "=> Configuration succeeded! (/etc/aria2/aria2.conf)"
@@ -180,7 +180,7 @@ log-level=warn
 log=/var/log/aria2/aria2.log
 # 后台运行
 # daemon=true
-dir=%DOWNLOAD_PATH%
+dir=%DOWNLOADPATH%
 input-file=/var/log/aria2/aria2.session
 save-session=/var/log/aria2/aria2.session
 save-session-interval=30
