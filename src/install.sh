@@ -15,10 +15,9 @@ install() {
 install_file() {
   if [ ! -d /var/log/aria2/ ]; then
     mkdir -p /var/log/aria2/
-  else
-    echo "" > /var/log/aria2/aria2.log
-    echo "" >/var/log/aria2/aria2.session
   fi
+  echo "" > /var/log/aria2/aria2.log
+  echo "" > /var/log/aria2/aria2.session
 
   if [ ! -d "$DOWNLOAD_PATH" ]; then
     mkdir -p "$DOWNLOAD_PATH"
@@ -40,7 +39,7 @@ Type=forking
 ExecStart=/usr/bin/aria2c --conf-path=/etc/aria2/aria2.conf
 
 [Install]
-WantedBy=default.target
+WantedBy=multi-user.target
 EOF
   fi
 }
@@ -48,13 +47,13 @@ install_aria2_conf() {
   if [ ! -d /etc/aria2/ ]; then
     mkdir -p /etc/aria2/
   fi
-  cat >/etc/aria2/aria2.conf <<EOF
+  cat > /etc/aria2/aria2.conf <<EOF
 # 日志
 log-level=warn
 log=/var/log/aria2/aria2.log
 # 后台运行
 # daemon=true
-dir=%DOWNLOADPATH%
+dir=/data/download
 input-file=/var/log/aria2/aria2.session
 save-session=/var/log/aria2/aria2.session
 save-session-interval=30
@@ -83,7 +82,7 @@ split=64
 #max-upload-limit=0
 ## RPC设置 ## ====
 # 启用RPC, 默认:false
-enable-rpc=%ENABLE_RPC%
+enable-rpc=false
 # 允许所有来源, 默认:false
 rpc-allow-origin-all=true
 # 允许非外部访问, 默认:false
@@ -91,10 +90,10 @@ rpc-listen-all=true
 # 事件轮询方式, 取值:[epoll, kqueue, port, poll, select], 不同系统默认值不同
 #event-poll=select
 # RPC监听端口, 端口被占用时可以修改, 默认:6800
-rpc-listen-port=%PORT%
+rpc-listen-port=6800
 
 # 设置的RPC授权令牌, v1.18.4新增功能, 取代 --rpc-user 和 --rpc-passwd 选项
-rpc-secret=%UUID%
+rpc-secret=123456
 
 # 是否启用 RPC 服务的 SSL/TLS 加密,
 # 启用加密后 RPC 服务需要使用 https 或者 wss 协议连接

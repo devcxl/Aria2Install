@@ -1,8 +1,10 @@
 #!/bin/bash
 # 交互式填写配置
 read_install_param() {
-    read -r -p "input you download path (default:/data/downloads/):" DOWNLOAD_PATH
+    read -r -p "Enter your download directory (default:/data/downloads/):" DOWNLOAD_PATH
     if [ -z "$DOWNLOAD_PATH" ]; then DOWNLOAD_PATH='/data/downloads'; fi
+    THREAD_NUM=$(cat /proc/cpuinfo | grep 'processor' | wc -l)
+    read -r -p "Enter the maximum number of threads per task (default:${THREAD_NUM})" THREAD_NUM
     read -r -p "enable RPC? (default:y)(y/n):" ENABLE_RPC
     case "$ENABLE_RPC" in
     Y | y | '')
